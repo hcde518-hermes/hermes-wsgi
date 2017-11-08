@@ -32,7 +32,7 @@ var respondWithMessage = function(sender_psid, response) {
         "uri": "https://graph.facebook.com/v2.6/me/messages",
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
-        "json": request_body
+        "json": message
     }, (err, res, body) => {
         if (err) {
           console.error("Unable to send message:" + err);
