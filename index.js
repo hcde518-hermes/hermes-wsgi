@@ -7,7 +7,7 @@ const
 
 app.listen(process.env.PORT || 8080, () => console.log('webhook is listening'));
 
-app.post('/webhook', (req, res) => {
+app.post('/bothook', (req, res) => {
 
   let body = req.body;
 
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
     console.log(req);
 });
 
-app.get('/webhook', (req, res) => {
+app.get('/bothook', (req, res) => {
 
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = "1234"
