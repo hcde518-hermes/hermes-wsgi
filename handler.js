@@ -8,6 +8,11 @@ module.exports = {
         var response = { "text": "" };
         response.text = "Meow";
 
+        if (received_message.nlp) {
+            let entitites = received_message.nlp.entitites
+            console.log(entitites)
+        }
+
         respondWithMessage(sender_psid, response);
     },
 
