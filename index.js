@@ -32,6 +32,10 @@ app.post('/webhook', (req, res) => {
 
 });
 
+app.get('/', (req, res) => {
+    console.log(req);
+});
+
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
