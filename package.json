@@ -1,0 +1,22 @@
+{
+  "name": "hermes-wsgi",
+  "version": "0.0.1",
+  "description": "Simple Hermes WSGI",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcde518-hermes/hermes-wsgi.git"
+  },
+  "author": "Blake Tsuzaki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcde518-hermes/hermes-wsgi/issues"
+  },
+  "homepage": "https://github.com/hcde518-hermes/hermes-wsgi#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
