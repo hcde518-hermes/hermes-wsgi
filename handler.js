@@ -8,9 +8,9 @@ module.exports = {
         var response = { "text": "" };
         response.text = "Meow";
 
-        if (received_message.nlp) {
-            let entitites = received_message.nlp.entitites
-            console.log(entitites)
+        if (received_message.nlp && received_message.nlp.entities) {
+            let entities = received_message.nlp.entities
+            console.log(entities)
         }
 
         respondWithMessage(sender_psid, response);
