@@ -1,6 +1,7 @@
 const
     PAGE_ACCESS_TOKEN = "EAABwUGkFhW0BAJR6VsDmkYPnzDWu84rIIJNTfrJ50UZBMh2h0alNoFiuDLze1ZA6IVPNim0IVjUlx2NMnZC1erYaMV1nEqaN4NS0BEYYoCwphSiEe6YY0g0ZAVe64XsvZB76vopClyYkkh9ZCzzmFxoCqraBeQs1bXIhOF6EX0WwZDZD",
-    request = require('request');
+    request = require('request'),
+    profileHandler = require('./helpers/profileHandler.js');
 
 module.exports = {
     handleMessage: function(sender, message) {
@@ -9,15 +10,17 @@ module.exports = {
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (greeting) {
-                response.text = "Hi " + sender.first_name + " !";
+                profileHandler.getInfo(sender.id, (user) => {
+                    response.text = "Hi " + user.first_name + " !";
+                    respondWithMessage(sender, response);
+                });
             } else {
                 response.text = "😒";
+                respondWithMessage(sender, response);
             }
             console.log(sender);
             console.log(message.nlp.entities);
         }
-
-        respondWithMessage(sender, response);
     },
 
     handlePostback: function(sender, postback) {
