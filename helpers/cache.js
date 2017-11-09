@@ -2,13 +2,12 @@ const
     jsonfile = require('jsonfile'),
     cacheFileLocation = './cache.json';
 
-var cacheObject = []
+var cacheObject;
 
 module.exports = {
     profileForId: function(id, callback) {
         let profiles = objectForKey("profiles");
         if (profiles) {
-            console.log("Found "+id+" in cache");
             callback(profiles[id]);
         } else {
             callback(null);
@@ -26,7 +25,7 @@ module.exports = {
 }
 
 var objectForKey = function(key) {
-    if (cacheObject == []) {
+    if (!cacheObject) {
         cacheObject = jsonfile.readFileSync(cacheFileLocation);
     }
     return cacheObject[key];
@@ -34,7 +33,7 @@ var objectForKey = function(key) {
 
 var storeObject = function(key, value) {
     cacheObject[key] = value;
-    jsonfile.writeFile(cacheFileLocation, cacheObject, {flag: 'a'}, function (err) {
+    jsonfile.writeFile(cacheFileLocation, cacheObject, function (err) {
         if (err) {
             console.error(err);
         }

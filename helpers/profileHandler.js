@@ -8,6 +8,7 @@ module.exports = {
     getInfo: function(id, callback) {
         cache.profileForId(id, (profile) => {
             if (profile) {
+                console.log("Found "+id+" in cache");
                 callback(profile);
             } else {
                 console.log("Retrieving " + id + " from endpoint");
