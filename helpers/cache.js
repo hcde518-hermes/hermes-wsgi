@@ -32,7 +32,7 @@ var objectForKey = function(key) {
         } catch(e) {
             fs.writeFile(cacheFileLocation, "{}", function(err) {
                 if(err) { console.log(err); }
-                console.log("The file was saved!");
+                console.log("Wrote new cache.json file");
             });
         }
 
