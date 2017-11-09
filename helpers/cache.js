@@ -34,7 +34,9 @@ var objectForKey = function(key) {
 
 var storeObject = function(key, value) {
     cacheObject[key] = value;
-    jsonfile.writeFile(cacheFileLocation, cacheObject, function (err) {
-        console.error(err);
+    jsonfile.writeFile(cacheFileLocation, cacheObject, {flag: 'a'}, function (err) {
+        if (err) {
+            console.error(err);
+        }
     });
 }
