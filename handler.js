@@ -13,7 +13,7 @@ module.exports = {
             } else {
                 response.text = "😒";
             }
-            console.log(entities);
+            console.log(message.nlp.entities);
         }
 
         respondWithMessage(sender, response);
