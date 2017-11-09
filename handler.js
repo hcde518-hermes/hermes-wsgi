@@ -34,7 +34,7 @@ var firstEntityForType = function(nlp, type) {
 }
 
 var entitiesForType = function(nlp, type) {
-    return nlp && nlp.entities && nlp.entities && nlp.entities[name]
+    return nlp && nlp.entities && nlp.entities && nlp.entities[type]
 }
 
 var respondWithMessage = function(recipient, response) {
