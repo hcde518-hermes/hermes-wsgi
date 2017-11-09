@@ -23,6 +23,10 @@ module.exports = {
         }
         storeObject("profiles", profiles);
     }
+    reboot: function() {
+        cacheObject = {};
+        jsonfile.writeFileSync(cacheFileLocation, {});
+    }
 }
 
 var objectForKey = function(key) {

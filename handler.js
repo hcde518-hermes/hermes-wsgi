@@ -2,6 +2,7 @@ const
     config = require('./config.json'),
     accessToken = config.accessToken,
     request = require('request'),
+    cache = require('./helpers/cache.js'),
     profileHandler = require('./helpers/profileHandler.js');
 
 module.exports = {
@@ -10,13 +11,19 @@ module.exports = {
 
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
-            if (greeting && greeting.confidence > 0.8) {
+            if (message.text == "reboot") {
+                cache.reboot();
+                response.text = "POOF! Cache was reset 💨";
+                respondWithMessage(senderId, response);
+            }
+            else if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (user) => {
                     console.log(user);
                     response.text = "Hi " + user.first_name + "!";
                     respondWithMessage(senderId, response);
                 });
-            } else {
+            }
+            else {
                 response.text = "😒";
                 respondWithMessage(senderId, response);
             }
