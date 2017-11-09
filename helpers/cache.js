@@ -22,7 +22,7 @@ module.exports = {
             profiles = { id: profile };
         }
         storeObject("profiles", profiles);
-    }
+    },
     reboot: function() {
         cacheObject = {};
         jsonfile.writeFileSync(cacheFileLocation, {});
