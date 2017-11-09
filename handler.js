@@ -3,33 +3,43 @@ const
     request = require('request');
 
 module.exports = {
-    // Handles messages events
-    handleMessage: function(sender_psid, received_message) {
+    handleMessage: function(sender, message) {
         var response = { "text": "" };
-        response.text = "Meow";
 
-        if (received_message.nlp && received_message.nlp.entities) {
-            let entities = received_message.nlp.entities
-            console.log(entities)
+        if (message.nlp && message.nlp.entities) {
+            let greeting = firstEntityForType(messages.nlp, 'greeting');
+            if (greeting) {
+                response.text = "Hi" + sender.first_name + "!";
+            } else {
+                response.text = "😒";
+            }
+            console.log(entities);
         }
 
-        respondWithMessage(sender_psid, response);
+        respondWithMessage(sender, response);
     },
 
-    // Handles messaging_postbacks events
-    handlePostback: function(sender_psid, received_postback) {
+    handlePostback: function(sender, postback) {
 
     },
 
-    handleRead: function(sender_psid, received_read) {
+    handleRead: function(sender, read) {
 
     }
 }
 
-// Sends response messages via the Send API
-var respondWithMessage = function(sender_psid, response) {
+var firstEntityForType = function(nlp, type) {
+    let entities = entitiesForType(nlp, type);
+    return entities && entities[0];
+}
+
+var entitiesForType = function(nlp, type) {
+    return nlp && nlp.entities && nlp.entities && nlp.entities[name]
+}
+
+var respondWithMessage = function(recipient, response) {
     let message = {
-        "recipient": { "id": sender_psid },
+        "recipient": { "id": recipient.id },
         "message": response
     }
 
