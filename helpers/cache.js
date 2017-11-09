@@ -8,6 +8,7 @@ module.exports = {
     profileForId: function(id, callback) {
         let profiles = objectForKey("profiles");
         if (profiles) {
+            console.log("Found "+id+" in cache");
             callback(profiles[id]);
         } else {
             callback(null);
