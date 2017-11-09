@@ -10,6 +10,7 @@ module.exports = {
             if (profile) {
                 callback(profile);
             } else {
+                console.log("Retrieving " + id + " from endpoint");
                 request({
                     "uri": "https://graph.facebook.com/v2.6/" + id + "?fields=first_name,last_name,profile_pic",
                     "qs": { "access_token": accessToken },
