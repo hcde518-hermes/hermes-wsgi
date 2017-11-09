@@ -7,7 +7,7 @@ module.exports = {
         var response = { "text": "" };
 
         if (message.nlp && message.nlp.entities) {
-            let greeting = firstEntityForType(message.nlp, 'greeting');
+            let greeting = firstEntityForType(message.nlp, 'greetings');
             if (greeting) {
                 response.text = "Hi" + sender.first_name + "!";
             } else {
