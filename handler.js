@@ -9,10 +9,11 @@ module.exports = {
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (greeting) {
-                response.text = "Hi" + sender.first_name + "!";
+                response.text = "Hi " + sender.first_name + " !";
             } else {
                 response.text = "😒";
             }
+            console.log(sender);
             console.log(message.nlp.entities);
         }
 
