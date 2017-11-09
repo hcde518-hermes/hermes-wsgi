@@ -12,7 +12,7 @@ module.exports = {
             if (err) {
               console.error("Unable to retrieve profile info: " + err);
           } else {
-              callback(res);
+              callback(body);
           }
         });
     }
