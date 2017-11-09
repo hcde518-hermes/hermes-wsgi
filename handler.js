@@ -10,7 +10,7 @@ module.exports = {
 
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
-            if (greeting) {
+            if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (user) => {
                     console.log(user);
                     response.text = "Hi " + user.first_name + "!";
