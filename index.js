@@ -13,6 +13,7 @@ app.post('/fbhook', (req, res) => {
   let body = req.body;
 
   if (body.object === 'page') {
+    res.status(200).send('EVENT_RECEIVED');
     body.entry.forEach(function(entry) {
       let webhookEvent = entry.messaging[0];
       let senderId = webhookEvent.sender.id;
@@ -25,7 +26,6 @@ app.post('/fbhook', (req, res) => {
           handler.handleRead(senderId, webhookEvent.read);
       }
     });
-    res.status(200).send('EVENT_RECEIVED');
   } else {
     res.sendStatus(404);
   }

@@ -26,7 +26,12 @@ module.exports = {
 
 var objectForKey = function(key) {
     if (!cacheObject) {
-        cacheObject = jsonfile.readFileSync(cacheFileLocation);
+        try {
+            cacheObject = jsonfile.readFileSync(cacheFileLocation);
+        } catch(e) {
+            console.log(e);
+        }
+
         if (!cacheObject) {
             cacheObject = {};
         }
