@@ -8,19 +8,27 @@ const
 
 module.exports = {
     handleMessage: function(senderId, message) {
-        var response = { "text": "" };
+        var response = {};
 
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (message.text == "reboot") {
-                response.text = "Are you sure?";
-                response.buttons = [
-                  {
-                    "type": "postback",
-                    "title": "Yes",
-                    "payload": userDefinedDeletion
-                  }
-                ]
+                response = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"button",
+                        "text":"Are you sure?",
+                        "buttons":[
+                            {
+                              "type": "postback",
+                              "title": "Yes",
+                              "payload": userDefinedDeletion
+                            }
+                        ]
+                      }
+                    }
+                }
                 respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
