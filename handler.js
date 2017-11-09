@@ -76,5 +76,6 @@ var respondWithMessage = function(recipientId, response) {
         if (err) {
           console.error("Unable to send message:" + err);
         }
+        console.log(JSON.parse(body));
     });
 }
