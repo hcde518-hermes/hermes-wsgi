@@ -8,11 +8,11 @@ module.exports = {
             "uri": "https://graph.facebook.com/v2.6/" + id + "?fields=first_name,last_name,profile_pic",
             "qs": { "access_token": PAGE_ACCESS_TOKEN },
             "method": "GET"
-        }, (err, json) => {
+        }, (err, res, body) => {
             if (err) {
               console.error("Unable to retrieve profile info: " + err);
           } else {
-              callback(json);
+              callback(JSON.parse(body));
           }
         });
     }
