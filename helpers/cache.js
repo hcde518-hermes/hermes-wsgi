@@ -1,5 +1,4 @@
 const
-    fs = require('fs'),
     jsonfile = require('jsonfile'),
     cacheFileLocation = './tmp/cache.json';
 
@@ -30,10 +29,7 @@ var objectForKey = function(key) {
         try {
             cacheObject = jsonfile.readFileSync(cacheFileLocation);
         } catch(e) {
-            fs.writeFile(cacheFileLocation, "{}", function(err) {
-                if(err) { console.log(err); }
-                console.log("Wrote new cache.json file");
-            });
+            jsonfile.writeFileSync(cacheFileLocation, {});
         }
 
         if (!cacheObject) {
