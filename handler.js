@@ -5,30 +5,30 @@ const
     profileHandler = require('./helpers/profileHandler.js');
 
 module.exports = {
-    handleMessage: function(sender, message) {
+    handleMessage: function(senderId, message) {
         var response = { "text": "" };
 
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (greeting) {
-                profileHandler.getInfo(sender.id, (user) => {
+                profileHandler.getInfo(senderId, (user) => {
                     console.log(user);
                     response.text = "Hi " + user.first_name + "!";
-                    respondWithMessage(sender, response);
+                    respondWithMessage(senderId, response);
                 });
             } else {
                 response.text = "😒";
-                respondWithMessage(sender, response);
+                respondWithMessage(senderId, response);
             }
             console.log(message.nlp.entities);
         }
     },
 
-    handlePostback: function(sender, postback) {
+    handlePostback: function(senderId, postback) {
 
     },
 
-    handleRead: function(sender, read) {
+    handleRead: function(senderId, read) {
 
     }
 }
@@ -42,9 +42,9 @@ var entitiesForType = function(nlp, type) {
     return nlp && nlp.entities && nlp.entities && nlp.entities[type]
 }
 
-var respondWithMessage = function(recipient, response) {
+var respondWithMessage = function(recipientId, response) {
     let message = {
-        "recipient": { "id": recipient.id },
+        "recipient": { "id": recipientId },
         "message": response
     }
 

@@ -15,14 +15,14 @@ app.post('/fbhook', (req, res) => {
   if (body.object === 'page') {
     body.entry.forEach(function(entry) {
       let webhookEvent = entry.messaging[0];
-      let sender = webhookEvent.sender;
+      let senderId = webhookEvent.sender.id;
 
       if (webhookEvent.message) {
-          handler.handleMessage(sender, webhookEvent.message);
+          handler.handleMessage(senderId, webhookEvent.message);
       } else if (webhookEvent.postback) {
-          handler.handlePostback(sender, webhookEvent.postback);
+          handler.handlePostback(senderId, webhookEvent.postback);
       } else if (webhookEvent.read) {
-          handler.handleRead(sender, webhookEvent.read);
+          handler.handleRead(senderId, webhookEvent.read);
       }
     });
     res.status(200).send('EVENT_RECEIVED');
