@@ -1,5 +1,6 @@
 const
-    PAGE_ACCESS_TOKEN = "EAABwUGkFhW0BAJR6VsDmkYPnzDWu84rIIJNTfrJ50UZBMh2h0alNoFiuDLze1ZA6IVPNim0IVjUlx2NMnZC1erYaMV1nEqaN4NS0BEYYoCwphSiEe6YY0g0ZAVe64XsvZB76vopClyYkkh9ZCzzmFxoCqraBeQs1bXIhOF6EX0WwZDZD",
+    config = require('./config.json'),
+    accessToken = config.accessToken,
     request = require('request'),
     profileHandler = require('./helpers/profileHandler.js');
 
@@ -12,7 +13,7 @@ module.exports = {
             if (greeting) {
                 profileHandler.getInfo(sender.id, (user) => {
                     console.log(user);
-                    response.text = "Hi " + user.first_name + " !";
+                    response.text = "Hi " + user.first_name + "!";
                     respondWithMessage(sender, response);
                 });
             } else {
@@ -49,7 +50,7 @@ var respondWithMessage = function(recipient, response) {
 
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "qs": { "access_token": accessToken },
         "method": "POST",
         "json": message
     }, (err, res, body) => {
