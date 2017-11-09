@@ -19,9 +19,9 @@ module.exports = {
         if (profiles) {
             profiles[id] = profile;
         } else {
-            profiles = {id: profile};
+            profiles = { id: profile };
         }
-        storeObject(profiles);
+        storeObject("profiles", profiles);
     }
 }
 
