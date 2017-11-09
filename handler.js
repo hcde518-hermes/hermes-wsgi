@@ -3,7 +3,8 @@ const
     accessToken = config.accessToken,
     request = require('request'),
     cache = require('./helpers/cache.js'),
-    profileHandler = require('./helpers/profileHandler.js');
+    profileHandler = require('./helpers/profileHandler.js'),
+    userDefinedDeletion = "kUserDefinedDeletion";
 
 module.exports = {
     handleMessage: function(senderId, message) {
@@ -12,8 +13,14 @@ module.exports = {
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (message.text == "reboot") {
-                cache.reboot();
-                response.text = "POOF! Cache was reset 💨";
+                response.text = "Are you sure?";
+                response.buttons = [
+                  {
+                    "type": "postback",
+                    "title": "Yes",
+                    "payload": userDefinedDeletion
+                  }
+                ]
                 respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
@@ -32,7 +39,12 @@ module.exports = {
     },
 
     handlePostback: function(senderId, postback) {
-
+        var response = { "text": "" };
+        if (postback.payload == userDefinedDeletion) {
+            cache.reboot();
+            response.text = "POOF! Data was reset ☑️";
+            respondWithMessage(senderId, response);
+        }
     },
 
     handleRead: function(senderId, read) {
