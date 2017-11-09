@@ -11,6 +11,7 @@ module.exports = {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             if (greeting) {
                 profileHandler.getInfo(sender.id, (user) => {
+                    console.log(user);
                     response.text = "Hi " + user.first_name + " !";
                     respondWithMessage(sender, response);
                 });
