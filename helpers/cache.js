@@ -1,6 +1,6 @@
 const
     jsonfile = require('jsonfile'),
-    cacheFileLocation = './cache.json';
+    cacheFileLocation = './helpers/cache.json';
 
 var cacheObject;
 
