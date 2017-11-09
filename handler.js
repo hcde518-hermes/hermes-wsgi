@@ -19,7 +19,6 @@ module.exports = {
                 response.text = "😒";
                 respondWithMessage(sender, response);
             }
-            console.log(sender);
             console.log(message.nlp.entities);
         }
     },
