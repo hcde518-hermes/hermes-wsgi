@@ -1,6 +1,6 @@
 const
     jsonfile = require('jsonfile'),
-    cacheFileLocation = './helpers/cache.json';
+    cacheFileLocation = './tmp/cache.json';
 
 var cacheObject;
 
@@ -27,6 +27,9 @@ module.exports = {
 var objectForKey = function(key) {
     if (!cacheObject) {
         cacheObject = jsonfile.readFileSync(cacheFileLocation);
+        if (!cacheObject) {
+            cacheObject = {};
+        }
     }
     return cacheObject[key];
 }
