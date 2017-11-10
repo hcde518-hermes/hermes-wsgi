@@ -6,7 +6,7 @@ const
 
 module.exports = {
     getInfo: function(id, callback) {
-        cache.profileForId(id, (profile) => {
+        cache.getFbProfile(id, (profile) => {
             if (profile) {
                 console.log("Found "+id+" in cache");
                 callback(profile);
@@ -21,7 +21,7 @@ module.exports = {
                       console.error("Unable to retrieve profile info: " + err);
                   } else {
                       let profile = JSON.parse(body);
-                      cache.storeProfile(id, profile);
+                      cache.storeFbProfile(id, profile);
                       callback(profile);
                   }
                 });

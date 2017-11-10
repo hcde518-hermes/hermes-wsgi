@@ -32,10 +32,24 @@ module.exports = {
                 respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
-                profileHandler.getInfo(senderId, (user) => {
-                    console.log(user);
-                    response.text = "Hi " + user.first_name + "!";
+                profileHandler.getInfo(senderId, (fbProfile) => {
+                    console.log(fbProfile);
+                    response.text = "Hi " + fbProfile.first_name + "!";
                     respondWithMessage(senderId, response);
+                    cache.getUserProfile(senderId, (userProfile) => {
+                        setTimeout(function() {
+                            if (!userProfile) {
+                                response.text = "I'm Hermes, your magical yet digital scheduling friend"
+                                respondWithMessage(senderId, response);
+                                setTimeout(function() {
+                                    response.text = "Let me know if you'd like to get started, or just wanna know more about what I do"
+                                    respondWithMessage(senderId, response);
+                                }, 500);
+                            } else {
+
+                            }
+                        }, 500);
+                    })
                 });
             }
             else {
