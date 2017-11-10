@@ -39,10 +39,10 @@ module.exports = {
                     cache.getUserProfile(senderId, (userProfile) => {
                         setTimeout(function() {
                             if (!userProfile) {
-                                response.text = "I'm Hermes, your magical yet digital scheduling friend"
+                                response.text = "I'm Hermes, your magical yet digital scheduling friend ✨"
                                 respondWithMessage(senderId, response);
                                 setTimeout(function() {
-                                    response.text = "Let me know if you'd like to get started, or just wanna know more about what I do"
+                                    response.text = "Let me know if you'd like to get started, or just wanna know more about what I do 😃"
                                     respondWithMessage(senderId, response);
                                 }, 1500);
                             } else {
