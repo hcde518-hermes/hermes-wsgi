@@ -26,7 +26,7 @@ module.exports = {
         let users = getObject("users");
         if (users) { users[id] = user; }
         else { users = { id: user }; }
-    }
+    },
     reboot: function() {
         cacheObject = {};
         jsonfile.writeFileSync(cacheFileLocation, {});
