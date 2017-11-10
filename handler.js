@@ -44,11 +44,11 @@ module.exports = {
                                 setTimeout(function() {
                                     response.text = "Let me know if you'd like to get started, or just wanna know more about what I do"
                                     respondWithMessage(senderId, response);
-                                }, 2000);
+                                }, 1500);
                             } else {
 
                             }
-                        }, 500);
+                        }, 1000);
                     })
                 });
             }
