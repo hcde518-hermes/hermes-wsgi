@@ -44,7 +44,7 @@ module.exports = {
                                 setTimeout(function() {
                                     response.text = "Let me know if you'd like to get started, or just wanna know more about what I do"
                                     respondWithMessage(senderId, response);
-                                }, 500);
+                                }, 2000);
                             } else {
 
                             }
