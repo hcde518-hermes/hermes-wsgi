@@ -6,6 +6,10 @@ const
 var cacheObject;
 
 module.exports = {
+    allUsers: function() {
+        let profiles = getObject("profiles");
+        return profiles;
+    },
     getFbProfile: function(id, callback) {
         let profiles = getObject("profiles");
         if (profiles) { callback(profiles[id]); }

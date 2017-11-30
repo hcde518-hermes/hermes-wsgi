@@ -4,7 +4,16 @@ const
     request = require('request'),
     cache = require('./helpers/cache.js'),
     profileHandler = require('./helpers/profileHandler.js'),
-    userDefinedDeletion = "kUserDefinedDeletion";
+    userDefinedDeletion = "kUserDefinedDeletion",
+    showMore = "kShowMore";
+    swapBack = "kSwapBack";
+    addPoints = "kAddPoints";
+    neverMind = "kNeverMind";
+    pointBack = "kPointBack";
+    takeShift = "kTakeShift";
+
+var
+    isSurging = false;
 
 module.exports = {
     handleMessage: function(senderId, message) {
@@ -12,6 +21,8 @@ module.exports = {
 
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
+            let intent = firstEntityForType(message.nlp, 'intent');
+            let dateTime = firstEntityForType(message.nlp, 'datetime');
             if (message.text == "reboot") {
                 response = {
                     "attachment":{
@@ -31,6 +42,9 @@ module.exports = {
                 }
                 respondWithMessage(senderId, response);
             }
+            else if (message.text == "surge staff") {
+                surgeStaff();
+            }
             else if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (fbProfile) => {
                     console.log(fbProfile);
@@ -38,22 +52,166 @@ module.exports = {
                     respondWithMessage(senderId, response);
                     cache.getUserProfile(senderId, (userProfile) => {
                         setTimeout(function() {
-                            if (!userProfile) {
-                                response.text = "I'm Hermes, your magical yet digital scheduling friend ✨"
-                                respondWithMessage(senderId, response);
-                                setTimeout(function() {
-                                    response.text = "Let me know if you'd like to get started, or just wanna know more about what I do 😃"
-                                    respondWithMessage(senderId, response);
-                                }, 1500);
-                            } else {
-
-                            }
+                            // if (!userProfile) {
+                            //     response.text = "I'm Hermes, your magical yet digital scheduling friend ✨"
+                            //     respondWithMessage(senderId, response);
+                            //     setTimeout(function() {
+                            //         response.text = "Let me know if you'd like to get started, or just wanna know more about what I do 😃"
+                            //         respondWithMessage(senderId, response);
+                            //     }, 1500);
+                            // } else {
+                            //
+                            // }
                         }, 1000);
                     })
                 });
             }
+            else if (intent && intent.confidence > 0.8) {
+                if (intent.value == "showShift") {
+                    response = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"list",
+                            "top_element_style":"LARGE",
+                            "elements": [
+                                {
+                                    "title": "MOD Pizza",
+                                    "subtitle": "University Ave",
+                                    "image_url": "http://www.nrn.com/sites/nrn.com/files/styles/article_featured_standard/public/uploads/2016/03/modpizzaext2014promo_0.jpg?itok=eelbyPNS"
+                                },
+                                {
+                                    "title": "Saturday",
+                                    "subtitle": "7:00AM-5:00PM"
+                                },
+                                {
+                                    "title": "Monday",
+                                    "subtitle": "7:00AM-5:00PM"
+                                },
+                                {
+                                    "title": "Tuesday",
+                                    "subtitle": "7:00AM-5:00PM"
+                                }
+                            ],
+                            "buttons": [
+                                {
+                                  "type": "postback",
+                                  "title": "Show more...",
+                                  "payload": showMore
+                                }
+                            ]
+                          }
+                        }
+                    }
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "swapShift") {
+                    if (dateTime && dateTime.confidence > 0.8) {
+                        initiateSwap(senderId)
+                    } else {
+                        response.text = "Which shift would you like to swap?";
+                        respondWithMessage(senderId, response);
+                        setTimeout(function() {
+                            response = {
+                                "attachment":{
+                                  "type":"template",
+                                  "payload":{
+                                    "template_type":"list",
+                                    "top_element_style":"LARGE",
+                                    "elements": [
+                                        {
+                                            "title": "MOD Pizza",
+                                            "subtitle": "University Ave",
+                                            "image_url": "http://www.nrn.com/sites/nrn.com/files/styles/article_featured_standard/public/uploads/2016/03/modpizzaext2014promo_0.jpg?itok=eelbyPNS"
+                                        },
+                                        {
+                                            "title": "Saturday",
+                                            "subtitle": "7:00AM-5:00PM",
+                                            "buttons": [
+                                                {
+                                                  "type": "postback",
+                                                  "title": "Swap Saturday",
+                                                  "payload": swapBack
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "title": "Monday",
+                                            "subtitle": "7:00AM-5:00PM",
+                                            "buttons": [
+                                                {
+                                                  "type": "postback",
+                                                  "title": "Swap Monday",
+                                                  "payload": swapBack
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "title": "Tuesday",
+                                            "subtitle": "7:00AM-5:00PM",
+                                            "buttons": [
+                                                {
+                                                  "type": "postback",
+                                                  "title": "Swap Tuesday",
+                                                  "payload": swapBack
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "buttons": [
+                                        {
+                                          "type": "postback",
+                                          "title": "Show more...",
+                                          "payload": showMore
+                                        }
+                                    ]
+                                  }
+                                }
+                            }
+                            respondWithMessage(senderId, response);
+                        }, 1000);
+                    }
+                }
+                else if (intent.value == "viewPoints") {
+                    response.text = "You have 190 points";
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "pointsToNextLevel") {
+                    response.text = "You have 190 points, only 10 away from Level 2";
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "askOLS") {
+                    if (isSurging) {
+                        response.text = "You are able to take this shift, as long as you are paid 1.5x the usual rate and are not scheduled for a shift tomorrow morning.";
+                    } else {
+                        response.text = "Office of Labor Standards [about text]";
+                    }
+
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "8-Ball") {
+                    switch (Math.floor(Math.random() * 3)) {
+                        case 0:
+                            response.text = "Sure, why not?";
+                            break;
+                        case 1:
+                            response.text = "Nah bro";
+                            break;
+                        case 2:
+                            response.text = "Maybe? You be the judge";
+                            break;
+                        default:
+                            response.text = "Meow";
+                    }
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "help") {
+                    response.text = "Sorry, this functionality hasn't been implemented yet."
+                    respondWithMessage(senderId, response);
+                }
+            }
             else {
-                response.text = "😒";
+                response.text = "Sorry, I'm not sure how to help with that.";
                 respondWithMessage(senderId, response);
             }
             console.log(message.nlp.entities);
@@ -67,11 +225,178 @@ module.exports = {
             response.text = "POOF! Data was reset ☑️";
             respondWithMessage(senderId, response);
         }
+        else if (postback.payload == showMore) {
+            response.text = "Sorry, I don't have any more shifts to show"
+            respondWithMessage(senderId, response);
+        }
+        else if (postback.payload == swapBack) {
+            initiateSwap(senderId)
+        }
+        else if (postback.payload == addPoints) {
+            response = {
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"button",
+                    "text":"How many points would you like to use?",
+                    "buttons":[
+                        {
+                          "type": "postback",
+                          "title": "5 Points",
+                          "payload": pointBack
+                        },
+                        {
+                          "type": "postback",
+                          "title": "10 Points",
+                          "payload": pointBack
+                        },
+                        {
+                          "type": "postback",
+                          "title": "15 Points",
+                          "payload": pointBack
+                        }
+                    ]
+                  }
+                }
+            }
+            respondWithMessage(senderId, response);
+        }
+        else if (postback.payload == pointBack) {
+            response.text = "OK! I've updated your offer!"
+            respondWithMessage(senderId, response);
+            setTimeout(function() {
+                response.text = "Looks like Sandy accepted!";
+                respondWithMessage(senderId, response);
+                setTimeout(function() {
+                    response = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"list",
+                            "top_element_style":"LARGE",
+                            "elements": [
+                                {
+                                    "title": "MOD Pizza",
+                                    "subtitle": "University Ave",
+                                    "image_url": "http://www.nrn.com/sites/nrn.com/files/styles/article_featured_standard/public/uploads/2016/03/modpizzaext2014promo_0.jpg?itok=eelbyPNS"
+                                },
+                                {
+                                    "title": "Saturday",
+                                    "subtitle": "FREE",
+                                }
+                            ]
+                        }
+                    }
+                }
+                respondWithMessage(senderId, response);
+            }, 1000);
+            }, 2000);
+        }
+        else if (postback.payload == takeShift) {
+            response.text = "Awesome! I'll let the manager know"
+            respondWithMessage(senderId, response);
+            setTimeout(function() {
+                response = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"list",
+                        "top_element_style":"LARGE",
+                        "elements": [
+                            {
+                                "title": "MOD Pizza",
+                                "subtitle": "University Ave",
+                                "image_url": "http://www.nrn.com/sites/nrn.com/files/styles/article_featured_standard/public/uploads/2016/03/modpizzaext2014promo_0.jpg?itok=eelbyPNS"
+                            },
+                            {
+                                "title": "Friday",
+                                "subtitle": "5:00PM-10:00PM",
+                            }
+                        ]
+                        }
+                    }
+                }
+                respondWithMessage(senderId, response);
+            }, 1000);
+        }
+        else if (postback.payload == neverMind) {
+            response.text = "OK! Just let me know if there's anything else you need"
+            respondWithMessage(senderId, response);
+        }
     },
 
     handleRead: function(senderId, read) {
 
     }
+}
+
+var surgeStaff = function() {
+    var profiles = cache.allUsers()
+    console.log(profiles);
+    for (profile in profiles) {
+        console.log(profile);
+        var response = {
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"Hi, looks like MOD Pizza is really busy tonight. Your manager is offering a reward of 20 points if you'd like to come in",
+                "buttons":[
+                    {
+                      "type": "postback",
+                      "title": "Sure",
+                      "payload": takeShift
+                    },
+                    {
+                        "type": "postback",
+                        "title": "No thanks",
+                        "payload": neverMind
+                    }
+                ]
+              }
+            }
+        }
+        respondWithMessage(profile, response);
+        isSurging = true;
+        setTimeout(function() {
+            isSurging = false;
+        }, 10000);
+    }
+}
+
+var initiateSwap = function(senderId) {
+    var response = { "text": "Alright, I'll ask the team" };
+    respondWithMessage(senderId, response);
+    setTimeout(function() {
+        response.text = "(For the purposes of this test, pretend 24 hours have elapsed)";
+        respondWithMessage(senderId, response);
+    }, 2000);
+    setTimeout(function() {
+        profileHandler.getInfo(senderId, (fbProfile) => {
+            response = {
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"button",
+                    "text":"Sorry " + fbProfile.first_name + ", looks like no one responded to your request. If you'd like, you can incentivize your offer with some points",
+                    "buttons":[
+                        {
+                          "type": "postback",
+                          "title": "Sure",
+                          "payload": addPoints
+                        },
+                        {
+                            "type": "postback",
+                            "title": "No thanks",
+                            "payload": neverMind
+                        }
+                    ]
+                  }
+                }
+            }
+            respondWithMessage(senderId, response);
+        });
+    }, 10000);
 }
 
 var firstEntityForType = function(nlp, type) {
