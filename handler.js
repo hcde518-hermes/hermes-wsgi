@@ -19,6 +19,7 @@ module.exports = {
     handleMessage: function(senderId, message) {
         var response = {};
 
+        console.log(message);
         if (message.nlp && message.nlp.entities) {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             let intent = firstEntityForType(message.nlp, 'intent');
@@ -197,42 +198,30 @@ module.exports = {
                           "payload":{
                             "template_type":"generic",
                             "elements": [
-                                {
-                                  "template_type":"generic",
-                                  "elements":[
+
                                      {
                                       "title":"Free Meal",
                                       "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png"
-                                  }]
-                              },
-                              {"template_type":"generic",
-                              "elements":[
+                                  },
                                      {
                                       "title":"$5 Gift Card",
                                       "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png"
-                                  }]
-                              },
-                              {"template_type":"generic",
-                              "elements":[
+                                  },
                                      {
                                       "title":"1 Bottle of Wine",
                                       "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
-                                  }]
-                              },
-                              {
-                                  "template_type":"generic",
-                                  "elements":[
+                                  },
                                      {
                                       "title":"1 Vacation Day",
                                       "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png"
                                      }
                                   ]
-                              }]
-                                }
-                          }
-                        }
+                              }
+                            }
+                        };
+                        respondWithMessage(senderId, response);
                     }
-                
+
                 else if (intent.value == "help") {
                     response.text = "Sorry, this functionality hasn't been implemented yet."
                     respondWithMessage(senderId, response);
