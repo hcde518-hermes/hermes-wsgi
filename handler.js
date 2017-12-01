@@ -325,7 +325,21 @@ module.exports = {
                 respondWithMessage(senderId, response);
 
                 setTimeout(function() {
-                    response.text =
+                    response = {"text": "You also now have 200 points! Welcome to Level 2"};
+                    respondWithMessage(senderId, response);
+                    setTimeout(function() {
+                        response = {
+                            "attachment": {
+                                "type": "image",
+                                "payload": {
+                                    "url": "https://i.pinimg.com/originals/31/f1/7d/31f17d37aad1b028590bb5ea0ba6df20.jpg",
+                                    "is_reusable": true
+                                }
+                            }
+                        }
+                        respondWithMessage(senderId, response);
+                    })
+                }, 1000);
             }, 1000);
         }
         else if (postback.payload == neverMind) {
