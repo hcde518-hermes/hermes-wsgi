@@ -49,7 +49,7 @@ module.exports = {
                 profileHandler.getInfo(senderId, (fbProfile) => {
                     console.log(fbProfile);
                     var profiles = cache.allUsers();
-                    if (profiles[senderId]) {
+                    if (false) {
                         response.text = "Hi " + fbProfile.first_name + "!";
                     } else {
                         response.text = "Hi " + fbProfile.first_name + ", welcome to the team. You can talk to me to ask for information, shift requests, and more!";
@@ -187,20 +187,41 @@ module.exports = {
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "8-Ball") {
-                    switch (Math.floor(Math.random() * 3)) {
-                        case 0:
-                            response.text = "Sure, why not?";
-                            break;
-                        case 1:
-                            response.text = "Nah bro";
-                            break;
-                        case 2:
-                            response.text = "Maybe? You be the judge";
-                            break;
-                        default:
-                            response.text = "Meow";
-                    }
+                    response.text = "That's up to you.";
                     respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "showRewards") {
+                    response = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"generic",
+                            "elements": [
+                                {
+                                  "template_type":"generic",
+                                  "elements":[
+                                     {
+                                      "title":"Free Meal",
+                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png"
+                                     },
+                                     {
+                                      "title":"$5 Gift Card",
+                                      "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png"
+                                     },
+                                     {
+                                      "title":"1 Bottle of Wine",
+                                      "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
+                                     },
+                                     {
+                                      "title":"1 Vacation Day",
+                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png"
+                                     },
+                                  ]
+                                }
+                            ]
+                          }
+                        }
+                    }
                 }
                 else if (intent.value == "help") {
                     response.text = "Sorry, this functionality hasn't been implemented yet."
