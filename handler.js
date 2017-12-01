@@ -24,7 +24,7 @@ module.exports = {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             let intent = firstEntityForType(message.nlp, 'intent');
             let dateTime = firstEntityForType(message.nlp, 'datetime');
-            let thanks = firstEntityForType(message.nlp, 'datetime');
+            let thanks = firstEntityForType(message.nlp, 'thanks');
             if (message.text == "reboot") {
                 response = {
                     "attachment":{
@@ -48,7 +48,7 @@ module.exports = {
                 surgeStaff();
             }
             else if (thanks && thanks.confidence > 0.8) {
-                response.text = "You're very welcome!";
+                response.text = "You're welcome! 😃";
                 respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
@@ -244,7 +244,7 @@ module.exports = {
                                 "is_reusable": true
                             }
                         }
-                    }
+                    };
                     respondWithMessage(senderId, response);
                     setTimeout(function() {
                         response = { "text": "Brb enjoyin mah nomz" };
