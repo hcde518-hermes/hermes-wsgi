@@ -247,7 +247,7 @@ module.exports = {
                     };
                     respondWithMessage(senderId, response);
                     setTimeout(function() {
-                        response = { "text": "Brb enjoyin mah nomz" };
+                        response = { "text": "nom nom nom" };
                         respondWithMessage(senderId, response);
                     }, 1000);
                 }
