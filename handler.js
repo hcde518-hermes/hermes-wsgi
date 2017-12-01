@@ -232,7 +232,7 @@ module.exports = {
                           }
                         }
                     }
-                }
+                
                 else if (intent.value == "help") {
                     response.text = "Sorry, this functionality hasn't been implemented yet."
                     respondWithMessage(senderId, response);
