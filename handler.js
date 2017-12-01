@@ -24,6 +24,7 @@ module.exports = {
             let greeting = firstEntityForType(message.nlp, 'greetings');
             let intent = firstEntityForType(message.nlp, 'intent');
             let dateTime = firstEntityForType(message.nlp, 'datetime');
+            let thanks = firstEntityForType(message.nlp, 'datetime');
             if (message.text == "reboot") {
                 response = {
                     "attachment":{
@@ -45,6 +46,10 @@ module.exports = {
             }
             else if (message.text == "surge staff") {
                 surgeStaff();
+            }
+            else if (thanks && thanks.confidence > 0.8) {
+                response.text = "You're very welcome!";
+                respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (fbProfile) => {
@@ -201,18 +206,22 @@ module.exports = {
 
                                      {
                                       "title":"Free Meal",
+                                      "subtitle":"10 Points",
                                       "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png"
                                   },
                                      {
                                       "title":"$5 Gift Card",
+                                      "subtitle":"5 Points",
                                       "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png"
                                   },
                                      {
                                       "title":"1 Bottle of Wine",
+                                      "subtitle":"20 Points",
                                       "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
                                   },
                                      {
                                       "title":"1 Vacation Day",
+                                      "subtitle":"100 Points",
                                       "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png"
                                      }
                                   ]
