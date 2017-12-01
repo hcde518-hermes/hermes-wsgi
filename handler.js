@@ -25,6 +25,7 @@ module.exports = {
             let intent = firstEntityForType(message.nlp, 'intent');
             let dateTime = firstEntityForType(message.nlp, 'datetime');
             let thanks = firstEntityForType(message.nlp, 'thanks');
+            let bye = firstEntityForType(message.nlp, 'bye');
             if (message.text == "reboot") {
                 response = {
                     "attachment":{
@@ -49,6 +50,10 @@ module.exports = {
             }
             else if (thanks && thanks.confidence > 0.8) {
                 response.text = "You're welcome! 😃";
+                respondWithMessage(senderId, response);
+            }
+            else if (thanks && thanks.confidence > 0.8) {
+                response.text = "Have a great day! 👋";
                 respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
