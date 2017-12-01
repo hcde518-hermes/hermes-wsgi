@@ -218,7 +218,7 @@ module.exports = {
                                       "title":"1 Bottle of Wine",
                                       "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
                                   }]
-                              }
+                              },
                               {
                                   "template_type":"generic",
                                   "elements":[
@@ -229,7 +229,6 @@ module.exports = {
                                   ]
                               }]
                                 }
-                            ]
                           }
                         }
                     }
