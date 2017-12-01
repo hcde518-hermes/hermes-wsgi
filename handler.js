@@ -229,6 +229,10 @@ module.exports = {
                             }
                         };
                         respondWithMessage(senderId, response);
+                        setTimeout(function() {
+                            response = { "text": "Here are your options" };
+                            respondWithMessage(senderId, response);
+                        }, 1000);
                     }
 
                 else if (intent.value == "help") {
@@ -430,7 +434,7 @@ var surgeStaff = function() {
         isSurging = true;
         setTimeout(function() {
             isSurging = false;
-        }, 10000);
+        }, 5000);
     }
 }
 
@@ -466,7 +470,7 @@ var initiateSwap = function(senderId) {
             }
             respondWithMessage(senderId, response);
         });
-    }, 10000);
+    }, 5000);
 }
 
 var firstEntityForType = function(nlp, type) {
