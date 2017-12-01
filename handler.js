@@ -235,6 +235,26 @@ module.exports = {
                     response.text = "Sorry, this functionality hasn't been implemented yet."
                     respondWithMessage(senderId, response);
                 }
+                else if (intent.value == "mischief") {
+                    response = {
+                        "attachment": {
+                            "type": "image",
+                            "payload": {
+                                "url": "https://i.pinimg.com/736x/74/c8/e7/74c8e715f884aa7aa084f3e07449f70b.jpg",
+                                "is_reusable": true
+                            }
+                        }
+                    }
+                    respondWithMessage(senderId, response);
+                    setTimeout(function() {
+                        response = { "text": "Brb enjoyin mah nomz" };
+                        respondWithMessage(senderId, response);
+                    }, 1000);
+                }
+                else if (intent.value == "sad") {
+                    response.text = "What's wrong?";
+                    respondWithMessage(senderId, response);
+                }
             }
             else {
                 response.text = "Sorry, I'm not sure how to help with that.";
