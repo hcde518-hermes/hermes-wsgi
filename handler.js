@@ -48,22 +48,19 @@ module.exports = {
             else if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (fbProfile) => {
                     console.log(fbProfile);
-                    response.text = "Hi " + fbProfile.first_name + "!";
-                    respondWithMessage(senderId, response);
-                    cache.getUserProfile(senderId, (userProfile) => {
+                    var profiles = cache.allUsers();
+                    if (profiles[senderId]) {
+                        response.text = "Hi " + fbProfile.first_name + "!";
+                    } else {
+                        response.text = "Hi " + fbProfile.first_name + ", welcome to the team. You can talk to me to ask for information, shift requests, and more!";
+
                         setTimeout(function() {
-                            // if (!userProfile) {
-                            //     response.text = "I'm Hermes, your magical yet digital scheduling friend ✨"
-                            //     respondWithMessage(senderId, response);
-                            //     setTimeout(function() {
-                            //         response.text = "Let me know if you'd like to get started, or just wanna know more about what I do 😃"
-                            //         respondWithMessage(senderId, response);
-                            //     }, 1500);
-                            // } else {
-                            //
-                            // }
+                            response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
+                            respondWithMessage(senderId, response);
                         }, 1000);
-                    })
+                    }
+
+                    respondWithMessage(senderId, response);
                 });
             }
             else if (intent && intent.confidence > 0.8) {
@@ -332,9 +329,7 @@ module.exports = {
 
 var surgeStaff = function() {
     var profiles = cache.allUsers()
-    console.log(profiles);
     for (profile in profiles) {
-        console.log(profile);
         var response = {
             "attachment":{
               "type":"template",
