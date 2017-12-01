@@ -240,25 +240,30 @@ module.exports = {
                         {
                           "type": "postback",
                           "title": "5 Points",
-                          "payload": pointBack
+                          "payload": pointBack + " 5"
                         },
                         {
                           "type": "postback",
                           "title": "10 Points",
-                          "payload": pointBack
+                          "payload": pointBack + " 10"
                         },
                         {
                           "type": "postback",
                           "title": "15 Points",
-                          "payload": pointBack
+                          "payload": pointBack + " 15"
                         }
                     ]
                   }
                 }
             }
             respondWithMessage(senderId, response);
+            setTimeout(function() {
+                response = {"text": "By the way, you have 190 points to use."}
+                respondWithMessage(senderId, response);
+            }, 1000);
         }
-        else if (postback.payload == pointBack) {
+        else if (postback.payload.indexOf(pointBack) > -1) {
+            var amount = parseInt(postback.payload.match(/\d/g));
             response.text = "OK! I've updated your offer!"
             respondWithMessage(senderId, response);
             setTimeout(function() {
@@ -287,6 +292,10 @@ module.exports = {
                 }
                 respondWithMessage(senderId, response);
             }, 1000);
+            setTimeout(function() {
+                response.text = "By the way, you have " + (190-amount).toString() + "points left";
+                respondWithMessage(senderId, response);
+            }, 2000);
             }, 2000);
         }
         else if (postback.payload == takeShift) {
@@ -314,6 +323,9 @@ module.exports = {
                     }
                 }
                 respondWithMessage(senderId, response);
+
+                setTimeout(function() {
+                    response.text =
             }, 1000);
         }
         else if (postback.payload == neverMind) {
