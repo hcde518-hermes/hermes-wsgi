@@ -379,11 +379,11 @@ module.exports = {
                         respondWithMessage(senderId, response);
 
                         setTimeout(function() {
-                            response.text = "You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
+                            response.text = "Points are valuable because you can use them to swap shifts or buy rewards.";
                             response.quick_replies = [
                               {
                                 "content_type":"text",
-                                "title":"What rewards?",
+                                "title":"View rewards",
                                 "payload": ""
                             }];
                             respondWithMessage(senderId, response);
