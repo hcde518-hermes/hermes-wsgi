@@ -418,7 +418,7 @@ module.exports = {
                             "attachment": {
                                 "type": "image",
                                 "payload": {
-                                    "url": "https://cdn.shopify.com/s/files/1/1256/8861/products/57d3f5e9ac411_large.jpg?v=1473509264",
+                                    "url": "https://i.pinimg.com/736x/3e/70/42/3e70420d6c0546f80c0db7095ac86cf3.jpg",
                                     "is_reusable": true
                                 }
                             }
