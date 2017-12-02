@@ -48,6 +48,9 @@ module.exports = {
             else if (message.text == "surge staff") {
                 surgeStaff();
             }
+            else if (message.text == "heads up") {
+                headsUp();
+            }
             else if (thanks && thanks.confidence > 0.8) {
                 response.text = "You're welcome!";
                 respondWithMessage(senderId, response);
@@ -654,6 +657,15 @@ var surgeRequestMessage = function(profile) {
         };
         respondWithMessage(profile, response);
     }, 1000);
+}
+
+var headsUp = function() {
+    var profiles = cache.allUsers()
+    for (profile in profiles) {
+        var response = { "text" : "Heads up! Your shift is about to start in an hour" }
+        respondWithMessage(profile, response);
+        surgeRequestMessage(profile);
+    }
 }
 
 var surgeStaff = function() {
