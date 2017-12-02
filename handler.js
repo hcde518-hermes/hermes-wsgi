@@ -286,7 +286,7 @@ module.exports = {
                         };
                         respondWithMessage(senderId, response);
                         setTimeout(function() {
-                            response = { "text": "Here are your options" };
+                            response = { "text": "Here's what you can get!" };
                             respondWithMessage(senderId, response);
                         }, 1000);
                     }
@@ -508,6 +508,7 @@ module.exports = {
 
             setTimeout(function() {
                 response = {
+                    "attachment":{
                     "type":"template",
                     "payload":{
                       "template_type":"list",
@@ -520,6 +521,7 @@ module.exports = {
                       }
                       ]
                      }
+                 }
              };
              respondWithMessage(senderId, response);
             }, 1000);
@@ -530,6 +532,7 @@ module.exports = {
 
             setTimeout(function() {
                 response = {
+                    "attachment":{
                     "type":"template",
                     "payload":{
                       "template_type":"list",
@@ -542,6 +545,7 @@ module.exports = {
                       }
                       ]
                      }
+                 }
              };
              respondWithMessage(senderId, response);
             }, 1000);
@@ -552,6 +556,7 @@ module.exports = {
 
             setTimeout(function() {
                 response = {
+                    "attachment":{
                     "type":"template",
                     "payload":{
                       "template_type":"list",
@@ -564,6 +569,7 @@ module.exports = {
                       }
                       ]
                      }
+                 }
              };
              respondWithMessage(senderId, response);
             }, 1000);
@@ -574,6 +580,7 @@ module.exports = {
 
             setTimeout(function() {
                 response = {
+                    "attachment":{
                     "type":"template",
                     "payload":{
                       "template_type":"list",
@@ -586,6 +593,7 @@ module.exports = {
                       }
                       ]
                      }
+                 }
              };
              respondWithMessage(senderId, response);
             }, 1000);
