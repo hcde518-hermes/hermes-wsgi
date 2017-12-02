@@ -370,7 +370,7 @@ module.exports = {
                                 },
                                 {
                                     "title": "Saturday",
-                                    "subtitle": "FREE",
+                                    "subtitle": "No Shift",
                                 }
                             ]
                         }
