@@ -70,17 +70,17 @@ module.exports = {
                             response.quick_replies = [
                               {
                                 "content_type":"text",
-                                "title":"Show me my shifts",
+                                "title":"Show shifts",
                                 "payload": ""
                               },
                               {
                                 "content_type":"text",
-                                "title":"How many points do I have?",
+                                "title":"Points",
                                 "payload": ""
                               },
                               {
                                 "content_type":"text",
-                                "title":"Can I swap a shift?",
+                                "title":"Can I swap?",
                                 "payload": ""
                                 },
                                 {
