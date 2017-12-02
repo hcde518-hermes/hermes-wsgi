@@ -477,7 +477,7 @@ module.exports = {
                         ]
                         }
                     }
-                }
+                };
                 respondWithMessage(senderId, response);
 
                 setTimeout(function() {
@@ -511,8 +511,7 @@ module.exports = {
                     "attachment":{
                     "type":"template",
                     "payload":{
-                      "template_type":"list",
-                      "top_element_style":"LARGE",
+                      "template_type":"generic",
                       "elements": [
                           {
                               "title":"Free Meal",
@@ -535,8 +534,7 @@ module.exports = {
                     "attachment":{
                     "type":"template",
                     "payload":{
-                      "template_type":"list",
-                      "top_element_style":"LARGE",
+                      "template_type":"generic",
                       "elements": [
                           {
                               "title":"$5 Gift Card",
@@ -559,8 +557,7 @@ module.exports = {
                     "attachment":{
                     "type":"template",
                     "payload":{
-                      "template_type":"list",
-                      "top_element_style":"LARGE",
+                      "template_type":"generic",
                       "elements": [
                           {
                               "title":"1 Bottle of Wine",
@@ -583,8 +580,7 @@ module.exports = {
                     "attachment":{
                     "type":"template",
                     "payload":{
-                      "template_type":"list",
-                      "top_element_style":"LARGE",
+                      "template_type":"generic",
                       "elements": [
                           {
                               "title":"1 Vacation Day",
