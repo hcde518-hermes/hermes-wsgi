@@ -353,7 +353,7 @@ module.exports = {
             response.text = "OK! I've updated your offer!"
             respondWithMessage(senderId, response);
             setTimeout(function() {
-                response.text = "Looks like Sandy accepted!";
+                response.text = "Looks like someone accepted!";
                 respondWithMessage(senderId, response);
                 setTimeout(function() {
                     response = {
