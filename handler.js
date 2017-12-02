@@ -516,7 +516,7 @@ module.exports = {
                             "attachment": {
                                 "type": "image",
                                 "payload": {
-                                    "url": "https://data.whicdn.com/images/124863657/thumb.gif",
+                                    "url": "https://i.imgur.com/c7YcNjc.jpg",
                                     "is_reusable": true
                                 }
                             }
@@ -629,35 +629,39 @@ module.exports = {
     }
 }
 
+var surgeRequestMessage = function(profile) {
+    setTimeout(function() {
+        var response = {
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"button",
+                "text":"Your manager is offering a reward of 20 points if you'd like to come in.",
+                "buttons":[
+                    {
+                      "type": "postback",
+                      "title": "Sure",
+                      "payload": takeShift
+                    },
+                    {
+                        "type": "postback",
+                        "title": "No thanks",
+                        "payload": neverMind
+                    }
+                ]
+              }
+            }
+        };
+        respondWithMessage(profile, response);
+    }, 1000);
+}
+
 var surgeStaff = function() {
     var profiles = cache.allUsers()
     for (profile in profiles) {
         var response = { "text" : "Hi, looks like MOD Pizza is really busy tonight 5:00PM-10:00PM." }
         respondWithMessage(profile, response);
-        setTimeout(function() {
-            response = {
-                "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"button",
-                    "text":"Your manager is offering a reward of 20 points if you'd like to come in.",
-                    "buttons":[
-                        {
-                          "type": "postback",
-                          "title": "Sure",
-                          "payload": takeShift
-                        },
-                        {
-                            "type": "postback",
-                            "title": "No thanks",
-                            "payload": neverMind
-                        }
-                    ]
-                  }
-                }
-            }
-            respondWithMessage(profile, response);
-        }, 1000);
+        surgeRequestMessage(profile);
     }
     isSurging = true;
     setTimeout(function() {
