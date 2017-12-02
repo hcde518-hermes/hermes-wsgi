@@ -56,6 +56,22 @@ module.exports = {
                         "attachment": {
                             "type": "image",
                             "payload": {
+                                "url": "https://i.pinimg.com/originals/31/f1/7d/31f17d37aad1b028590bb5ea0ba6df20.jpg",
+                                "is_reusable": true
+                            }
+                        }
+                    }
+                    respondWithMessage(senderId, response);
+                }, 1000);
+            }
+            else if (bye && bye.confidence > 0.8) {
+                response.text = "Have a great day!";
+                respondWithMessage(senderId, response);
+                setTimeout(function() {
+                    response = {
+                        "attachment": {
+                            "type": "image",
+                            "payload": {
                                 "url": "https://i.pinimg.com/736x/18/2a/44/182a440132932712002a290134472379--pusheen-cat-grumpy-cat.jpg",
                                 "is_reusable": true
                             }
