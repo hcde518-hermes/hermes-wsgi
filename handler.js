@@ -67,25 +67,28 @@ module.exports = {
 
                         setTimeout(function() {
                             response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
-                            respondWithMessage(senderId, response);
-                            response = {"quick_replies": [
+                            response.quick_replies = [
                               {
                                 "content_type":"text",
-                                "title":"Show me my shifts"
+                                "title":"Show me my shifts",
+                                "payload": ""
                               },
                               {
                                 "content_type":"text",
-                                "title":"How many points do I have?"
+                                "title":"How many points do I have?",
+                                "payload": ""
                               },
                               {
                                 "content_type":"text",
-                                "title":"Can I swap a shift?"
+                                "title":"Can I swap a shift?",
+                                "payload": ""
                                 },
                                 {
                                   "content_type":"text",
-                                  "title":"meow"
+                                  "title":"meow",
+                                  "payload": ""
                                 }
-                            ]};
+                            ]
                             respondWithMessage(senderId, response);
                         }, 1000);
                     }
