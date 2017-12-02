@@ -56,7 +56,7 @@ module.exports = {
                         "attachment": {
                             "type": "image",
                             "payload": {
-                                "url": "https://i.pinimg.com/originals/31/f1/7d/31f17d37aad1b028590bb5ea0ba6df20.jpg",
+                                "url": "https://i.imgur.com/LPR6wcW.jpg",
                                 "is_reusable": true
                             }
                         }
