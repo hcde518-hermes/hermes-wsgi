@@ -67,29 +67,34 @@ module.exports = {
 
                         setTimeout(function() {
                             response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
-                            response.quick_replies = [
-                              {
-                                "content_type":"text",
-                                "title":"Show shifts",
-                                "payload": ""
-                              },
-                              {
-                                "content_type":"text",
-                                "title":"Points",
-                                "payload": ""
-                              },
-                              {
-                                "content_type":"text",
-                                "title":"Can I swap?",
-                                "payload": ""
-                                },
-                                {
-                                  "content_type":"text",
-                                  "title":"meow",
-                                  "payload": ""
-                                }
-                            ]
                             respondWithMessage(senderId, response);
+
+                            setTimeout(function() {
+                                response.text = "";
+                                response.quick_replies = [
+                                  {
+                                    "content_type":"text",
+                                    "title":"Show shifts",
+                                    "payload": ""
+                                  },
+                                  {
+                                    "content_type":"text",
+                                    "title":"View points",
+                                    "payload": ""
+                                  },
+                                  {
+                                    "content_type":"text",
+                                    "title":"Can I swap?",
+                                    "payload": ""
+                                    },
+                                    {
+                                      "content_type":"text",
+                                      "title":"meow",
+                                      "payload": ""
+                                    }
+                                ];
+                                respondWithMessage(senderId, response);
+                            }, 1000);
                         }, 1000);
                     }
 
