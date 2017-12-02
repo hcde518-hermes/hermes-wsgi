@@ -516,7 +516,7 @@ module.exports = {
                             "attachment": {
                                 "type": "image",
                                 "payload": {
-                                    "url": "https://data.whicdn.com/images/74780595/original.jpg",
+                                    "url": "https://data.whicdn.com/images/124863657/thumb.gif",
                                     "is_reusable": true
                                 }
                             }
