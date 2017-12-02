@@ -425,7 +425,7 @@ module.exports = {
                         }
                         respondWithMessage(senderId, response);
                     })
-                }, 1000);
+                }, 2000);
             }, 1000);
         }
         else if (postback.payload == neverMind) {
