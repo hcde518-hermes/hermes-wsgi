@@ -478,7 +478,7 @@ module.exports = {
                     }
                 }
                 respondWithMessage(senderId, response);
-            }, 1000);
+            }, 3000);
             setTimeout(function() {
                 response.text = "By the way, you have " + (190-amount).toString() + "points left";
                 respondWithMessage(senderId, response);
