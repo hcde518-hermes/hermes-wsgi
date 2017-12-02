@@ -677,7 +677,7 @@ var surgeStaff = function() {
     isSurging = true;
     setTimeout(function() {
         isSurging = false;
-    }, 5000);
+    }, 10000);
 }
 
 var initiateSwap = function(senderId) {
