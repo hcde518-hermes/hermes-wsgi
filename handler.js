@@ -63,10 +63,10 @@ module.exports = {
                     if (false) {
                         response.text = "Hi " + fbProfile.first_name + "!";
                     } else {
-                        response.text = "Hi " + fbProfile.first_name + ", welcome to the team. You can talk to me to ask for information, shift requests, and more!";
+                        response.text = "Hi " + fbProfile.first_name + ", welcome to the team. You can ask me for help with schedule changes, reward point management and more!";
 
                         setTimeout(function() {
-                            response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
+                            response.text = "So, how can I help?";
 
                             response.quick_replies = [
                               {
@@ -96,7 +96,7 @@ module.exports = {
                                 }
                             ];
                             respondWithMessage(senderId, response);
-                        }, 1000);
+                        }, 2000);
                     }
 
                     respondWithMessage(senderId, response);
@@ -290,6 +290,16 @@ module.exports = {
                 }
                 else if (intent.value == "sad") {
                     response.text = "What's wrong?";
+                    respondWithMessage(senderId, response);
+                }
+                else if (intent.value == "explainPoints") {
+                    response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"What rewards can I get?",
+                        "payload": ""
+                    }];
                     respondWithMessage(senderId, response);
                 }
             }
