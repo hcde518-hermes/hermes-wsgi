@@ -664,7 +664,6 @@ var headsUp = function() {
     for (profile in profiles) {
         var response = { "text" : "Heads up! Your shift is about to start in an hour" }
         respondWithMessage(profile, response);
-        surgeRequestMessage(profile);
     }
 }
 
