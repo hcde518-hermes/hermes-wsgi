@@ -49,8 +49,20 @@ module.exports = {
                 surgeStaff();
             }
             else if (thanks && thanks.confidence > 0.8) {
-                response.text = "You're welcome! 😃";
+                response.text = "You're welcome!";
                 respondWithMessage(senderId, response);
+                setTimeout(function() {
+                    response = {
+                        "attachment": {
+                            "type": "image",
+                            "payload": {
+                                "url": "https://i.pinimg.com/736x/18/2a/44/182a440132932712002a290134472379--pusheen-cat-grumpy-cat.jpg",
+                                "is_reusable": true
+                            }
+                        }
+                    }
+                    respondWithMessage(senderId, response);
+                }, 1000);
             }
             else if (thanks && thanks.confidence > 0.8) {
                 response.text = "Have a great day! 👋";
