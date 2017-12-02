@@ -86,6 +86,11 @@ module.exports = {
                                 },
                                 {
                                   "content_type":"text",
+                                  "title":"View rewards",
+                                  "payload": ""
+                                  },
+                                {
+                                  "content_type":"text",
                                   "title":"meow",
                                   "payload": ""
                                 }
