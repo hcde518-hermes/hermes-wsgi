@@ -209,11 +209,11 @@ module.exports = {
                     }
                 }
                 else if (intent.value == "viewPoints") {
-                    response.text = "You have 190 points";
+                    response.text = "You have 190 points. You're currently on Level 1.";
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "pointsToNextLevel") {
-                    response.text = "You have 190 points, only 10 away from Level 2";
+                    response.text = "You have 190 points, only 10 away from Level 2.";
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "askOLS") {
@@ -350,7 +350,7 @@ module.exports = {
         }
         else if (postback.payload.indexOf(pointBack) > -1) {
             var amount = parseInt(postback.payload.match(/\d/g));
-            response.text = "OK! I've updated your offer!"
+            response.text = "OK I've updated your offer!"
             respondWithMessage(senderId, response);
             setTimeout(function() {
                 response.text = "Looks like someone accepted! Here's your updated schedule:";
@@ -418,7 +418,7 @@ module.exports = {
                             "attachment": {
                                 "type": "image",
                                 "payload": {
-                                    "url": "https://i.pinimg.com/736x/3e/70/42/3e70420d6c0546f80c0db7095ac86cf3.jpg",
+                                    "url": "https://data.whicdn.com/images/74780595/original.jpg",
                                     "is_reusable": true
                                 }
                             }
@@ -442,33 +442,37 @@ module.exports = {
 var surgeStaff = function() {
     var profiles = cache.allUsers()
     for (profile in profiles) {
-        var response = {
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"button",
-                "text":"Hi, looks like MOD Pizza is really busy tonight. Your manager is offering a reward of 20 points if you'd like to come in",
-                "buttons":[
-                    {
-                      "type": "postback",
-                      "title": "Sure",
-                      "payload": takeShift
-                    },
-                    {
-                        "type": "postback",
-                        "title": "No thanks",
-                        "payload": neverMind
-                    }
-                ]
-              }
-            }
-        }
+        var response = { "text" : "Hi, looks like MOD Pizza is really busy tonight 5:00PM-10:00PM." }
         respondWithMessage(profile, response);
-        isSurging = true;
         setTimeout(function() {
-            isSurging = false;
-        }, 5000);
+            response = {
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"button",
+                    "text":"Your manager is offering a reward of 20 points if you'd like to come in.",
+                    "buttons":[
+                        {
+                          "type": "postback",
+                          "title": "Sure",
+                          "payload": takeShift
+                        },
+                        {
+                            "type": "postback",
+                            "title": "No thanks",
+                            "payload": neverMind
+                        }
+                    ]
+                  }
+                }
+            }
+            respondWithMessage(profile, response);
+        }, 1000);
     }
+    isSurging = true;
+    setTimeout(function() {
+        isSurging = false;
+    }, 5000);
 }
 
 var initiateSwap = function(senderId) {
