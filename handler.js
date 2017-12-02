@@ -235,22 +235,50 @@ module.exports = {
                                      {
                                       "title":"Free Meal",
                                       "subtitle":"10 Points",
-                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png"
+                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png",
+                                      "buttons":[
+                                          {
+                                            "type": "postback",
+                                            "title": "More info...",
+                                            "payload": "moreInfoMeal"
+                                          }
+                                      ]
                                   },
                                      {
                                       "title":"$5 Gift Card",
                                       "subtitle":"5 Points",
-                                      "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png"
+                                      "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png",
+                                      "buttons":[
+                                          {
+                                            "type": "postback",
+                                            "title": "More info...",
+                                            "payload": "moreInfoCard"
+                                          }
+                                      ]
                                   },
                                      {
                                       "title":"1 Bottle of Wine",
                                       "subtitle":"20 Points",
-                                      "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
+                                      "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png",
+                                      "buttons":[
+                                          {
+                                            "type": "postback",
+                                            "title": "More info...",
+                                            "payload": "moreInfoWine"
+                                          }
+                                      ]
                                   },
                                      {
                                       "title":"1 Vacation Day",
                                       "subtitle":"100 Points",
-                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png"
+                                      "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png",
+                                      "buttons":[
+                                          {
+                                            "type": "postback",
+                                            "title": "More info...",
+                                            "payload": "moreInfoVaca"
+                                          }
+                                      ]
                                      }
                                   ]
                               }
@@ -327,7 +355,7 @@ module.exports = {
                             response.quick_replies = [
                               {
                                 "content_type":"text",
-                                "title":"What rewards can I get?",
+                                "title":"What rewards?",
                                 "payload": ""
                             }];
                             respondWithMessage(senderId, response);
@@ -473,6 +501,94 @@ module.exports = {
         else if (postback.payload == neverMind) {
             response.text = "OK! Just let me know if there's anything else you need"
             respondWithMessage(senderId, response);
+        }
+        else if (postback.payload == "moreInfoMeal") {
+            response.text = "Get any menu item you'd like on the house. Yum!";
+            respondWithMessage(senderId, response);
+
+            setTimeout(function() {
+                response = {
+                    "type":"template",
+                    "payload":{
+                      "template_type":"list",
+                      "top_element_style":"LARGE",
+                      "elements": [
+                          {
+                              "title":"Free Meal",
+                          "subtitle":"10 Points",
+                          "image_url":"http://www.emoji.co.uk/files/emoji-one/food-drink-emoji-one/1632-pot-of-food.png"
+                      }
+                      ]
+                     }
+             };
+             respondWithMessage(senderId, response);
+            }, 1000);
+        }
+        else if (postback.payload == "moreInfoCard") {
+            response.text = "A $5 giftcard of your choice. Use at any of our stores or partner stores!";
+            respondWithMessage(senderId, response);
+
+            setTimeout(function() {
+                response = {
+                    "type":"template",
+                    "payload":{
+                      "template_type":"list",
+                      "top_element_style":"LARGE",
+                      "elements": [
+                          {
+                              "title":"$5 Gift Card",
+                              "subtitle":"5 Points",
+                              "image_url":"https://thecryobar.com/wp-content/uploads/2017/05/giftcard.png"
+                      }
+                      ]
+                     }
+             };
+             respondWithMessage(senderId, response);
+            }, 1000);
+        }
+        else if (postback.payload == "moreInfoWine") {
+            response.text = "A bottle of wine for that special date or for when you're just feeling classy!";
+            respondWithMessage(senderId, response);
+
+            setTimeout(function() {
+                response = {
+                    "type":"template",
+                    "payload":{
+                      "template_type":"list",
+                      "top_element_style":"LARGE",
+                      "elements": [
+                          {
+                              "title":"1 Bottle of Wine",
+                              "subtitle":"20 Points",
+                              "image_url":"https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/wine-glass_1f377.png"
+                      }
+                      ]
+                     }
+             };
+             respondWithMessage(senderId, response);
+            }, 1000);
+        }
+        else if (postback.payload == "moreInfoVaca") {
+            response.text = "When you need to get away from it all. We'll cover your shift(s) for the day!";
+            respondWithMessage(senderId, response);
+
+            setTimeout(function() {
+                response = {
+                    "type":"template",
+                    "payload":{
+                      "template_type":"list",
+                      "top_element_style":"LARGE",
+                      "elements": [
+                          {
+                              "title":"1 Vacation Day",
+                              "subtitle":"100 Points",
+                              "image_url":"http://www.emoji.co.uk/files/emoji-one/travel-places-emoji-one/1801-beach-with-umbrella.png"
+                      }
+                      ]
+                     }
+             };
+             respondWithMessage(senderId, response);
+            }, 1000);
         }
     },
 
