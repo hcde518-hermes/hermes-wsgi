@@ -76,7 +76,7 @@ module.exports = {
                               },
                               {
                                 "content_type":"text",
-                                "title":"View points",
+                                "title":"What are points?",
                                 "payload": ""
                               },
                               {
@@ -84,11 +84,6 @@ module.exports = {
                                 "title":"Can I swap?",
                                 "payload": ""
                                 },
-                                {
-                                  "content_type":"text",
-                                  "title":"View rewards",
-                                  "payload": ""
-                                  },
                                 {
                                   "content_type":"text",
                                   "title":"meow",
@@ -269,8 +264,36 @@ module.exports = {
                     }
 
                 else if (intent.value == "help") {
-                    response.text = "Sorry, this functionality hasn't been implemented yet."
+                    response.text = "I'm Hermes, your scheduling assistant. I can help you manage your shifts, communicate with your manager and co-workers, and more!";
                     respondWithMessage(senderId, response);
+
+                    setTimeout(function() {
+                        response.text = "Let me know if you'd like to get started!";
+
+                        response.quick_replies = [
+                          {
+                            "content_type":"text",
+                            "title":"Show shifts",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"What are points?",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"Can I swap?",
+                            "payload": ""
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"meow",
+                              "payload": ""
+                            }
+                        ];
+                        respondWithMessage(senderId, response);
+                    }, 2000);
                 }
                 else if (intent.value == "mischief") {
                     response = {
@@ -293,14 +316,23 @@ module.exports = {
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "explainPoints") {
-                    response.text = "Every time you respond to my message, you already get 1 point! You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
-                    response.quick_replies = [
-                      {
-                        "content_type":"text",
-                        "title":"What rewards can I get?",
-                        "payload": ""
-                    }];
+                    response.text = "Points are a way your employer rewards you for a job well done."
                     respondWithMessage(senderId, response);
+                    setTimeout(function() {
+                        response.text = "Every time you respond to my message, you already get 1 point! Every time you do something awesome, like pick up a shift or help out a fellow employee, you get more points."
+                        respondWithMessage(senderId, response);
+
+                        setTimeout(function() {
+                            response.text = "You can offer your points to encourage coworkers to pick up your shifts or use them to buy rewards.";
+                            response.quick_replies = [
+                              {
+                                "content_type":"text",
+                                "title":"What rewards can I get?",
+                                "payload": ""
+                            }];
+                            respondWithMessage(senderId, response);
+                        }, 2000);
+                    }, 1000);
                 }
             }
             else {
