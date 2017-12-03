@@ -64,6 +64,28 @@ module.exports = {
                             }
                         }
                     }
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"Show shifts",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"What are points?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Can I swap?",
+                        "payload": ""
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"meow",
+                          "payload": ""
+                        }
+                    ];
                     respondWithMessage(senderId, response);
                 }, 1000);
             }
@@ -82,10 +104,6 @@ module.exports = {
                     }
                     respondWithMessage(senderId, response);
                 }, 1000);
-            }
-            else if (thanks && thanks.confidence > 0.8) {
-                response.text = "Have a great day! 👋";
-                respondWithMessage(senderId, response);
             }
             else if (greeting && greeting.confidence > 0.8) {
                 profileHandler.getInfo(senderId, (fbProfile) => {
@@ -164,7 +182,29 @@ module.exports = {
                             ]
                           }
                         }
-                    }
+                    };
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"Can I swap?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"What are points?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Who are you?",
+                        "payload": ""
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"meow",
+                          "payload": ""
+                        }
+                    ];
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "swapShift") {
@@ -236,10 +276,54 @@ module.exports = {
                 }
                 else if (intent.value == "viewPoints") {
                     response.text = "You have 190 points. You're currently on Level 1.";
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"Show shifts",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"What are points?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Can I swap?",
+                        "payload": ""
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"meow",
+                          "payload": ""
+                        }
+                    ];
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "pointsToNextLevel") {
                     response.text = "You have 190 points, only 10 away from Level 2.";
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"Show shifts",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"What are points?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Can I swap?",
+                        "payload": ""
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"meow",
+                          "payload": ""
+                        }
+                    ];
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "askOLS") {
@@ -253,6 +337,28 @@ module.exports = {
                 }
                 else if (intent.value == "8-Ball") {
                     response.text = "That's up to you.";
+                    response.quick_replies = [
+                      {
+                        "content_type":"text",
+                        "title":"Show shifts",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"What are points?",
+                        "payload": ""
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Can I swap?",
+                        "payload": ""
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"meow",
+                          "payload": ""
+                        }
+                    ];
                     respondWithMessage(senderId, response);
                 }
                 else if (intent.value == "showRewards") {
@@ -318,6 +424,28 @@ module.exports = {
                         respondWithMessage(senderId, response);
                         setTimeout(function() {
                             response = { "text": "Here's what you can get!" };
+                            response.quick_replies = [
+                              {
+                                "content_type":"text",
+                                "title":"Show shifts",
+                                "payload": ""
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"What are points?",
+                                "payload": ""
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"Can I swap?",
+                                "payload": ""
+                                },
+                                {
+                                  "content_type":"text",
+                                  "title":"meow",
+                                  "payload": ""
+                                }
+                            ];
                             respondWithMessage(senderId, response);
                         }, 1000);
                     }
@@ -367,6 +495,28 @@ module.exports = {
                     respondWithMessage(senderId, response);
                     setTimeout(function() {
                         response = { "text": "nom nom nom" };
+                        response.quick_replies = [
+                          {
+                            "content_type":"text",
+                            "title":"Show shifts",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"What are points?",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"Can I swap?",
+                            "payload": ""
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"meow",
+                              "payload": ""
+                            }
+                        ];
                         respondWithMessage(senderId, response);
                     }, 1000);
                 }
@@ -411,6 +561,28 @@ module.exports = {
         }
         else if (postback.payload == showMore) {
             response.text = "Sorry, I don't have any more shifts to show"
+            response.quick_replies = [
+              {
+                "content_type":"text",
+                "title":"Show shifts",
+                "payload": ""
+              },
+              {
+                "content_type":"text",
+                "title":"What are points?",
+                "payload": ""
+              },
+              {
+                "content_type":"text",
+                "title":"Can I swap?",
+                "payload": ""
+                },
+                {
+                  "content_type":"text",
+                  "title":"meow",
+                  "payload": ""
+                }
+            ];
             respondWithMessage(senderId, response);
         }
         else if (postback.payload == swapBack) {
@@ -477,6 +649,28 @@ module.exports = {
                         }
                     }
                 }
+                response.quick_replies = [
+                  {
+                    "content_type":"text",
+                    "title":"Show shifts",
+                    "payload": ""
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"What are points?",
+                    "payload": ""
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Can I swap?",
+                    "payload": ""
+                    },
+                    {
+                      "content_type":"text",
+                      "title":"meow",
+                      "payload": ""
+                    }
+                ];
                 respondWithMessage(senderId, response);
             }, 3000);
             setTimeout(function() {
@@ -524,13 +718,57 @@ module.exports = {
                                 }
                             }
                         }
+                        response.quick_replies = [
+                          {
+                            "content_type":"text",
+                            "title":"Show shifts",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"What are points?",
+                            "payload": ""
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"Can I swap?",
+                            "payload": ""
+                            },
+                            {
+                              "content_type":"text",
+                              "title":"meow",
+                              "payload": ""
+                            }
+                        ];
                         respondWithMessage(senderId, response);
                     })
                 }, 2000);
             }, 1000);
         }
         else if (postback.payload == neverMind) {
-            response.text = "OK! Just let me know if there's anything else you need"
+            response.text = "OK! Just let me know if there's anything else you need";
+            response.quick_replies = [
+              {
+                "content_type":"text",
+                "title":"Show shifts",
+                "payload": ""
+              },
+              {
+                "content_type":"text",
+                "title":"What are points?",
+                "payload": ""
+              },
+              {
+                "content_type":"text",
+                "title":"Can I swap?",
+                "payload": ""
+                },
+                {
+                  "content_type":"text",
+                  "title":"meow",
+                  "payload": ""
+                }
+            ];
             respondWithMessage(senderId, response);
         }
         else if (postback.payload == "moreInfoMeal") {
@@ -553,6 +791,28 @@ module.exports = {
                      }
                  }
              };
+             response.quick_replies = [
+               {
+                 "content_type":"text",
+                 "title":"Show shifts",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"What are points?",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"Can I swap?",
+                 "payload": ""
+                 },
+                 {
+                   "content_type":"text",
+                   "title":"meow",
+                   "payload": ""
+                 }
+             ];
              respondWithMessage(senderId, response);
             }, 1000);
         }
@@ -576,6 +836,28 @@ module.exports = {
                      }
                  }
              };
+             response.quick_replies = [
+               {
+                 "content_type":"text",
+                 "title":"Show shifts",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"What are points?",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"Can I swap?",
+                 "payload": ""
+                 },
+                 {
+                   "content_type":"text",
+                   "title":"meow",
+                   "payload": ""
+                 }
+             ];
              respondWithMessage(senderId, response);
             }, 1000);
         }
@@ -599,6 +881,28 @@ module.exports = {
                      }
                  }
              };
+             response.quick_replies = [
+               {
+                 "content_type":"text",
+                 "title":"Show shifts",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"What are points?",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"Can I swap?",
+                 "payload": ""
+                 },
+                 {
+                   "content_type":"text",
+                   "title":"meow",
+                   "payload": ""
+                 }
+             ];
              respondWithMessage(senderId, response);
             }, 1000);
         }
@@ -622,6 +926,28 @@ module.exports = {
                      }
                  }
              };
+             response.quick_replies = [
+               {
+                 "content_type":"text",
+                 "title":"Show shifts",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"What are points?",
+                 "payload": ""
+               },
+               {
+                 "content_type":"text",
+                 "title":"Can I swap?",
+                 "payload": ""
+                 },
+                 {
+                   "content_type":"text",
+                   "title":"meow",
+                   "payload": ""
+                 }
+             ];
              respondWithMessage(senderId, response);
             }, 1000);
         }
@@ -663,6 +989,28 @@ var headsUp = function() {
     var profiles = cache.allUsers()
     for (profile in profiles) {
         var response = { "text" : "Heads up! Your shift is about to start in an hour" }
+        response.quick_replies = [
+          {
+            "content_type":"text",
+            "title":"Show shifts",
+            "payload": ""
+          },
+          {
+            "content_type":"text",
+            "title":"What are points?",
+            "payload": ""
+          },
+          {
+            "content_type":"text",
+            "title":"Can I swap?",
+            "payload": ""
+            },
+            {
+              "content_type":"text",
+              "title":"meow",
+              "payload": ""
+            }
+        ];
         respondWithMessage(profile, response);
     }
 }
